@@ -16,8 +16,6 @@ userApp.post("/register",async(req,res)=>{
     if (existingUser) {
       return res.status(400).json({message:"User already exists"});
     }
-   
-}
     newUser.password=await hash(newUser.password,12);
     const userDoc=new UserModel(newUser);
     await userDoc.save();
