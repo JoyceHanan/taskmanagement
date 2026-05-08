@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Task Management System
 
 ## Features
