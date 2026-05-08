@@ -23,7 +23,7 @@ userApp.post("/register",async(req,res)=>{
     res.cookie("token",token,{
       httpOnly: true,
       sameSite: "lax",
-      secure: false,
+      secure:true,
     });
     let userObj=userDoc.toObject();
     delete userObj.password;
@@ -53,12 +53,12 @@ userApp.post("/login",async(req,res)=>{
     res.cookie("token",token,{
       httpOnly: true,
       sameSite: "lax",
-      secure: false,
+      secure:true,
     });
     res.cookie("refreshToken",refreshToken,{
       httpOnly: true,
       sameSite: "lax",
-      secure: false,
+      secure: true,
     });
     let userObj=user.toObject();
     delete userObj.password;
@@ -71,12 +71,12 @@ userApp.post("/login",async(req,res)=>{
 userApp.get("/logout",(req,res) =>{
   res.clearCookie("token",{
     httpOnly: true,
-    secure: false,
+    secure:true,
     sameSite: "lax",
   });
   res.clearCookie("refreshToken",{
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: "lax",
   });
   res.status(200).json({message:"Logout Successful"});
@@ -154,10 +154,10 @@ userApp.post("/refresh",async(req,res)=>{
     if(!user||user.refreshToken!==refreshToken) {
       return res.status(403).json({message:"Invalid refresh token"});
     }
-    const newAccessToken=sign({id:user._id,email:user.email},process.env.JWT_SECRET,{expiresIn:"2d"});
+    const newAccessToken=sign({id:user._id,email:user.email,role:user.role},process.env.JWT_SECRET,{expiresIn:"2d"});
     res.cookie("token",newAccessToken,{
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "lax",
     });
     res.status(200).json({message:"Token Refreshed",token:newAccessToken});

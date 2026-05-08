@@ -5,11 +5,9 @@ import { userApp } from './apis/userAPI.js'
 import {taskApp} from './apis/taskAPI.js'
 import { adminApp } from './apis/adminAPI.js'
 import cookieParser from "cookie-parser"
-
+ import cors from 'cors'
 config()
  const app=exp()
- import cors from 'cors'
-
 app.use(cors({
   origin: ['http://localhost:5174', 'https://taskmanagement-flame.vercel.app'],
   credentials: true,               
