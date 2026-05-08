@@ -28,8 +28,8 @@ app.get('/seed-admin', async (req, res) => {
     await new UserModel({
       username: 'admin',
       email: 'admin@gmail.com',
-      password: '$2a$12$ZwQfJVeW1OAdxjf6oITxx.KucSLkqoFo4tApaMkKbZQaCtpj7y5Wy',
-      role: 'admin',
+      password: hashed,
+      role: 'ADMIN',
     }).save()
     res.json({ message: 'Admin created successfully' })
   } catch (err) {
