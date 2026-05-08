@@ -4,6 +4,7 @@ import {hash,compare} from "bcrypt";
 import {verifyToken} from "../middleware/verifyToken.js";
 import {config} from "dotenv";
 import jwt from "jsonwebtoken";
+import { now } from "mongoose";
 
 config();
 const {sign,verify}=jwt;
@@ -22,7 +23,7 @@ userApp.post("/register",async(req,res)=>{
 
     res.cookie("token",token,{
       httpOnly: true,
-      sameSite: "lax",
+      sameSite:"none",
       secure:true,
     });
     let userObj=userDoc.toObject();
@@ -52,12 +53,12 @@ userApp.post("/login",async(req,res)=>{
     await user.save();
     res.cookie("token",token,{
       httpOnly: true,
-      sameSite: "lax",
+      sameSite:"none",
       secure:true,
     });
     res.cookie("refreshToken",refreshToken,{
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "none",
       secure: true,
     });
     let userObj=user.toObject();
@@ -72,12 +73,12 @@ userApp.get("/logout",(req,res) =>{
   res.clearCookie("token",{
     httpOnly: true,
     secure:true,
-    sameSite: "lax",
+    sameSite:"none",
   });
   res.clearCookie("refreshToken",{
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite:"none",
   });
   res.status(200).json({message:"Logout Successful"});
 });
@@ -158,7 +159,7 @@ userApp.post("/refresh",async(req,res)=>{
     res.cookie("token",newAccessToken,{
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
+      sameSite:"none",
     });
     res.status(200).json({message:"Token Refreshed",token:newAccessToken});
   } 
