@@ -12,10 +12,6 @@ export const userApp=exp.Router();
 userApp.post("/register",async(req,res)=>{
   try {
     const newUser=req.body;
-     if(newUser.email === "admin@gmail.com"){
-         newUser.role = "ADMIN"
-           }else{
-       newUser.role = "USER"
     const existingUser=await UserModel.findOne({ email:newUser.email});
     if (existingUser) {
       return res.status(400).json({message:"User already exists"});
