@@ -11,7 +11,7 @@ config()
  import cors from 'cors'
 
 app.use(cors({
-  origin: 'http://localhost:5174',
+  origin: ['http://localhost:5174', 'https://taskmanagement-flame.vercel.app'],
   credentials: true,               
 }))
  app.use(exp.json())
