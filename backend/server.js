@@ -5,8 +5,7 @@ import { userApp } from './apis/userAPI.js'
 import {taskApp} from './apis/taskAPI.js'
 import { adminApp } from './apis/adminAPI.js'
 import cookieParser from "cookie-parser"
-import { UserModel } from './model/userModel.js'
-import { hash } from 'bcrypt'
+
  import cors from 'cors'
 config()
  const app=exp()
@@ -28,8 +27,8 @@ app.get('/seed-admin', async (req, res) => {
     await new UserModel({
       username: 'admin',
       email: 'admin@gmail.com',
-      password: hashed,
-      role: 'ADMIN',
+      password: '$2a$12$ZwQfJVeW1OAdxjf6oITxx.KucSLkqoFo4tApaMkKbZQaCtpj7y5Wy',
+      role: 'admin',
     }).save()
     res.json({ message: 'Admin created successfully' })
   } catch (err) {
