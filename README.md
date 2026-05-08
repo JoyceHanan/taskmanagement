@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Task Management System
 
 ## Features
@@ -42,5 +42,5 @@ POST /task-api/tasks
 - JWT stateless authentication
 - Separate admin/user APIs
 - Easily extensible for microservices
-=======
+  
 
